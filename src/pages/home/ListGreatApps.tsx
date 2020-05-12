@@ -18,6 +18,7 @@ const ListGreatApps: FunctionComponent<({
     }) => {
     useEffect(() => {
         getAllAppInfo();
+        // eslint-disable-next-line
     }, []);
     if(appInfoState.loading === true || !appInfoState.data){
         return <LoadingWidget />
@@ -53,7 +54,7 @@ const AppInfoItem: FunctionComponent<({
     let appName = appInfo.appName ? appInfo.appName : appInfo.title;
     return (
         <Grid item xs={6} sm={4} md={2} className="app-info-item">
-            <Button href={"/about?appNameId=" + appInfo.appNameId} target="_blank">
+            <Button href={`/${appInfo.appNameId === 'asvab-practice-test-2020' ? 'game' : 'about'}?appNameId=` + appInfo.appNameId} target="_blank">
                 <div>
                     <Image src={appInfo.avatar} alt={appName} width="100%" />
                 </div>

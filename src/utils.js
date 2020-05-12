@@ -66,7 +66,7 @@ export function replaceItem(list, paramName, newItem) {
         console.error('ParamName null ', paramName);
     }
     // console.log("replace item ", newItem, 'paramName ', paramName, 'list ', Object.assign({}, list));
-    let index = list.findIndex((item) => item[paramName] == newItem[paramName]);
+    let index = list.findIndex((item) => item[paramName] === newItem[paramName]);
     if(index > -1){
         list[index] = newItem;
     } else {
@@ -106,3 +106,7 @@ export function stringReplaceUrl(str, regexReplace) {
 	}
 	return result.replace(/[^a-zA-Z0-9_-]/g,regexReplace ? regexReplace : '-').replace(/-{2,}/g, '-').replace(/--/g, '-').toLowerCase();
 }
+
+export function convertSecondToMinute (time) {
+    return `${Math.floor(time/60)}m${time%60}s`
+} 

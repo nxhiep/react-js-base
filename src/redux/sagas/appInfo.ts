@@ -46,13 +46,13 @@ function* getAllAppInfoSaga() {
             yield take(Types.GET_ALL_APP_INFO);
             let appInfoState: AppInfoState = yield select((appState: AppState) => appState.appInfoState);
             let appInfos: Array<AppInfo> = [];
-            if(appInfoState && appInfoState.list && appInfoState.list.length == MIN_APP){
+            if(appInfoState && appInfoState.list && appInfoState.list.length === MIN_APP){
                 appInfoState.list.forEach((app: any) => {
                     let appInfo: AppInfo = AppInfo.fromJS(app);
                     appInfos.push(appInfo);
                 });
             }
-            if(appInfos.length == 0){
+            if(appInfos.length === 0){
                 let apps = yield call(getAllAppInfo);
                 apps && apps.forEach((app: any) => {
                     let appInfo: AppInfo = AppInfo.fromJS(app);

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from './pages/home/HomePage';
 import AboutPage from './pages/about/AboutPage';
+import GamePage from './pages/game/GamePage';
 import Routes from './routes';
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
         </Route>
         <Route exact path={Routes.ABOUT_SCREEN}>
           <AboutPage />
+        </Route>
+        <Route exact path={Routes.GAME_SCREEN}>
+          <GamePage />
         </Route>
       </Switch>
     </Router>
