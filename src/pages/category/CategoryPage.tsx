@@ -20,6 +20,7 @@ const CategoryPage: FunctionComponent<{
       if (parsed.categoryId) fetchCourseByCategoryId(parsed.categoryId);
     }
     fetchAllCategory();
+    //eslint-disable-next-line
   }, []);
 
   return (
