@@ -5,6 +5,8 @@ import appValueState from './appValue';
 import courseState from './course';
 import categoryState from './category';
 import topicState from './topic';
+import lessonState from './lesson';
+import assignmentState from './assignment';
 import authState from './auth';
 
 const rootReducer = combineReducers<AppState>({
@@ -13,6 +15,9 @@ const rootReducer = combineReducers<AppState>({
   auth: authState,
   categoryState: categoryState,
   courseState: courseState,
-  topicState: topicState
+  topicState: topicState,
+  lessonState: lessonState,
+  assignmentState: assignmentState
 });
+
 export default rootReducer;

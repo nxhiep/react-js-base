@@ -34,7 +34,7 @@ class Course implements CourseEntity {
       avatar,
       timeExpire,
       lessionIds,
-      documentIds
+      documentIds,
     } = props;
     this.id = id ? id : -1;
     this.memberNum = memberNum ? memberNum : 0;
@@ -46,15 +46,6 @@ class Course implements CourseEntity {
     this.timeExpire = timeExpire ? timeExpire : 180;
     this.lessionIds = lessionIds ? lessionIds : [];
     this.documentIds = documentIds ? documentIds : [];
-  }
-
-  public static fromJS(courseInfo: CourseEntity | string | Object): Course {
-    if (typeof courseInfo === 'string') {
-      return new Course(JSON.parse(courseInfo));
-    } else {
-      let obj = Object.create(Course.prototype);
-      return new Course(Object.assign(obj, courseInfo));
-    }
   }
 }
 
