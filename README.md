@@ -26,3 +26,10 @@
 14/5/2020
 
 - Added diary notebook in README.md file
+
+### Version 1.3
+
+15/5/2020
+ - Added topic, lesson, assignment domain, screen, reducer, action, saga
+ - Rename game to lesson
+ - Added get-topic-by-id and get-course-by-id api

@@ -9,6 +9,7 @@ import Header from '../../components/Header';
 import { MainWidget, FixedContainer } from '../../components/Widgets';
 import '../../resources/scss/about.scss';
 import '../../resources/scss/main.scss';
+
 const CategoryPage: FunctionComponent<{
   fetchAllCategory: Function;
   fetchCourseByCategoryId: Function;
