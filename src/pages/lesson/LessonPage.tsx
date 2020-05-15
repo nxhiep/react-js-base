@@ -1,24 +1,31 @@
 import React, { useEffect, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../redux/appstate';
-import * as courseAction from '../../redux/actions/course';
+import * as topicAction from '../../redux/actions/topic';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { MainWidget, FixedContainer } from '../../components/Widgets';
+import { getIdByPathName } from '../../utils';
 import '../../resources/scss/about.scss';
 import '../../resources/scss/main.scss';
-const TopicPage: FunctionComponent<{
-  fetchCourseByCategoryId: Function;
-}> = ({ fetchCourseByCategoryId }) => {
+const LessonPage: FunctionComponent<{
+  fetchTopicByParentId: Function;
+  match: any;
+}> = ({ fetchTopicByParentId, match }) => {
   useEffect(() => {
-    fetchCourseByCategoryId(5639651486334976);
+    const pathname = match.params.pathname;
+    if (match.params.pathname) {
+      const parentId = getIdByPathName(pathname);
+      fetchTopicByParentId(parentId);
+    }
+    //eslint-disable-next-line
   }, []);
 
   return (
     <MainWidget className={'about-page'}>
       <Header />
       <FixedContainer>
-        <h1>That is topic page</h1>
+        <h1>That is lesson page</h1>
       </FixedContainer>
       <Footer />
     </MainWidget>
@@ -27,13 +34,13 @@ const TopicPage: FunctionComponent<{
 
 const mapStateToProps = (state: AppState, ownProps: any) => {
   return {
-    courseState: state.courseState,
+    topicState: state.topicState,
     ...ownProps
   };
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchCourseByCategoryId: (categoryId: number) =>
-    dispatch(courseAction.fetchCourseByCategoryId(categoryId))
+  fetchTopicByParentId: (parentId: number) =>
+    dispatch(topicAction.fetchTopicByParentId(parentId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopicPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LessonPage);

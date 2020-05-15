@@ -1,5 +1,4 @@
 import React, { useEffect, FunctionComponent } from 'react';
-import queryString from 'query-string';
 import { connect } from 'react-redux';
 import { AppState } from '../../redux/appstate';
 import * as topicAction from '../../redux/actions/topic';
@@ -8,15 +7,18 @@ import Header from '../../components/Header';
 import { MainWidget, FixedContainer } from '../../components/Widgets';
 import '../../resources/scss/about.scss';
 import '../../resources/scss/main.scss';
+import { getIdByPathName } from '../../utils';
 const CoursePage: FunctionComponent<{
   fetchTopicByParentId: Function;
-  location: any;
-}> = ({ fetchTopicByParentId, location }) => {
+  match: any;
+}> = ({ fetchTopicByParentId, match }) => {
   useEffect(() => {
-    if (location.search) {
-      const parsed = queryString.parse(location.search);
-      if (parsed.parentId) fetchTopicByParentId(parsed.parentId);
+    const pathname = match.params.pathname;
+    if (match.params.pathname) {
+      const parentId = getIdByPathName(pathname);
+      fetchTopicByParentId(parentId);
     }
+    //eslint-disable-next-line
   }, []);
 
   return (
