@@ -1,5 +1,7 @@
 @import './mixin.scss';
-
+body {
+  font-size: 14px;;
+}
 .logo-web {
   font-size: 20px;
 }
@@ -21,44 +23,92 @@
     width: calc(100% - 40px);
   }
 }
+
+.makeStyles-inputRegister-21 label{
+    transform: translate(14px, 15px) scale(1),
+}
+
+.makeStyles-inputRegister-21 input{
+    padding: 12.5px 10px,
+}
 header {
-  .logo-web {
-    color: var(--main-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .fixed-container {
-    // padding-top: 10px;
-    // padding-bottom: 10px;
-  }
-  .header-tab-panel {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+    .logo-web {
+        color: var(--main-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-web img{
+        height: 50px;
+    }
+
+    .contact-infor{
+        font-size: 14px;
+        padding: 0 5px;
+        display: flex;
+        align-items: center;
+        color: #fff;
+
+        a{
+          color: #fff;
+        }
+
+        .icon {
+          font-size: 14px;
+        }
+    }
+
+
+    
+
+    .display-flex{
+        display: flex;
+    }
+    
+    .fixed-container {
+        // padding-top: 10px;
+        // padding-bottom: 10px;
+    }
+    .header-tab-panel {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
 }
 
 footer {
-  background-color: var(--main-color);
-  .logo-web {
-    color: white;
-    display: flex;
-    align-items: center;
-  }
-  .fixed-container {
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
+    background-color: var(--main-color);
+    .logo-web {
+        color: var(--main-color);
+        display: flex;
+        align-items: center;
+    }
 
-  #select-languages {
-    padding: 5px 10px;
-    min-width: 150px;
-  }
-  .footer-content {
-    display: flex;
-    align-items: center;
-    height: 50px;
-  }
+    .fixed-container {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .footer-content a{
+        color: #ddd;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .footer-content p{
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    #select-languages {
+        padding: 5px 10px;
+        min-width: 150px;
+    }
+    .footer-content {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .rating-panel {

@@ -5,6 +5,7 @@ import { CategoryState } from './reducers/category';
 import { TopicState } from './reducers/topic';
 import { LessonState } from './reducers/lesson';
 import { AssignmentState} from './reducers/assignment';
+import { ExamInfoState } from './reducers/examInfo';
 
 export interface AppState {
   appValueState: AppValueState;
@@ -14,4 +15,6 @@ export interface AppState {
   topicState: TopicState;
   lessonState: LessonState;
   assignmentState: AssignmentState;
+  examInfoState: ExamInfoState,
 }
+

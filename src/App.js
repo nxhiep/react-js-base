@@ -7,6 +7,8 @@ import CoursePage from './pages/course/CoursePage';
 import LessonPage from './pages/lesson/LessonPage';
 import TopicPage from './pages/topic/TopicPage';
 import AssignmentPage from './pages/assignment/AssignmentPage';
+import ExamPage from './pages/exam/ExamPage';
+import DetailExam from './pages/exam/DetailExam';
 import Routes from './routes';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route exact path={Routes.LESSON_SCREEN} component={LessonPage} />
         <Route exact path={Routes.TOPIC_SCREEN} component={TopicPage} />
         <Route exact path={Routes.ASSIGNMENT_SCREEN} component={AssignmentPage} />
+        <Route exact path={Routes.EXAM_SCREEN} component={ExamPage}/>
+        <Route exact path={Routes.DETAIL_EXAM_SCREEN} component={DetailExam}/>
       </Switch>
     </Router>
   );

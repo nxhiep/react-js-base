@@ -1,0 +1,54 @@
+@import './mixin.scss';
+.exam-page {
+    .row-info-panel {
+        display: flex;
+        justify-content: center;
+        padding: 10px 10px;
+        border-bottom: 1px solid #ddd;
+        margin: 0 20px;
+    }
+
+    .row-info-panel{
+        div {
+            width: 50%;
+            text-align: start;
+            padding: 0 15px;
+        }
+        
+        div:first-child{
+            text-align: end;
+        }
+
+    }
+
+    .title-block {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .title{
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .title-block:before {
+        content: "";
+        width: 2px;
+        background: #c21b17;
+        height: 100%;
+        left: -1px;
+        z-index: 2;
+        top: 0;
+        position: absolute;
+    }
+
+    .content-block-panel{
+        background-color: #fff;
+    }
+
+}
