@@ -1,4 +1,5 @@
 class Routes {
+
   static HOME_SCREEN = '/';
   static ABOUT_SCREEN = '/about';
   static COURSE_SCREEN = '/course/:pathname';
@@ -6,5 +7,8 @@ class Routes {
   static LESSON_SCREEN = '/lesson/:pathname';
   static ASSIGNMENT_SCREEN = '/assignment/:pathname';
   static CATEGORY_SCREEN = '/category';
+  static EXAM_SCREEN = "/exam";
+  static DETAIL_EXAM_SCREEN = "/detail-exam";
+
 }
 export default Routes;

@@ -44,6 +44,7 @@ function* getAllAppInfoSaga() {
     while(true) {
         try {
             yield take(Types.GET_ALL_APP_INFO);
+            
             let appInfoState: AppInfoState = yield select((appState: AppState) => appState.appInfoState);
             let appInfos: Array<AppInfo> = [];
             if(appInfoState && appInfoState.list && appInfoState.list.length === MIN_APP){

@@ -2,7 +2,9 @@
 
 .home-page {
     .list-great-apps {
+        margin-top: 112px;
         .app-info-item {
+            text-align: center;
             cursor: pointer;
             > a {
                 padding: 0;
@@ -31,6 +33,7 @@
             .rating {
                 margin-top: auto;
             }
-        }
+            
+        }  
     }
 }
