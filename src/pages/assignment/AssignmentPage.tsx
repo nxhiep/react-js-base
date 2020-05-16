@@ -10,14 +10,14 @@ import '../../resources/scss/about.scss';
 import '../../resources/scss/main.scss';
 
 const AssignmentPage: FunctionComponent<{
-  fetchTopicByTopicId: Function;
+  fetchSmallTopicByTopicId: Function;
   match: any;
-}> = ({ fetchTopicByTopicId, match }) => {
+}> = ({ fetchSmallTopicByTopicId, match }) => {
   useEffect(() => {
     const pathname = match.params.pathname;
     if (match.params.pathname) {
       const topicId = getIdByPathName(pathname);
-      fetchTopicByTopicId(topicId);
+      fetchSmallTopicByTopicId(topicId);
     }
     //eslint-disable-next-line
   }, []);
@@ -40,8 +40,8 @@ const mapStateToProps = (state: AppState, ownProps: any) => {
   };
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchTopicByTopicId: (topicId: number) =>
-    dispatch(topicAction.fetchTopicByTopicId(topicId)),
+  fetchSmallTopicByTopicId: (topicId: number) =>
+    dispatch(topicAction.fetchSmallTopicByTopicId(topicId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AssignmentPage);

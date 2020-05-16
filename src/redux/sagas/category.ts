@@ -1,20 +1,26 @@
 import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { callElearningApi } from '../../services';
-import { set as setCategory } from '../actions/category';
+import {
+  setCategory,
+  fetchCategorySuccess,
+  fetchCategoryOnProgress,
+} from '../actions/category';
 import { CATEGORY_FETCH_ALL } from '../actions/types';
 
 const fetchAllCategory = () => {
   return callElearningApi({
     url: `get-categories`,
     params: null,
-    method: 'post'
+    method: 'post',
   });
 };
 
 export function* fetch() {
   try {
+    yield put(fetchCategoryOnProgress());
     const response = yield call(fetchAllCategory);
     yield put(setCategory(response));
+    yield put(fetchCategorySuccess());
   } catch (err) {
     console.log(err);
   }

@@ -38,13 +38,13 @@ const CategoryPage: FunctionComponent<{
 const mapStateToProps = (state: AppState, ownProps: any) => {
   return {
     categoryState: state.categoryState,
-    ...ownProps
+    ...ownProps,
   };
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchAllCategory: () => dispatch(categoryAction.fetch()),
+  fetchAllCategory: () => dispatch(categoryAction.fetchCategory()),
   fetchCourseByCategoryId: (categoryId: number) =>
-    dispatch(courseAction.fetchCourseByCategoryId(categoryId))
+    dispatch(courseAction.fetchCourseByCategoryId(categoryId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

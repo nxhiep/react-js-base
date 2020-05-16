@@ -1,26 +1,21 @@
 import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { callElearningApi } from '../../services';
 import {
-  set as setTopic,
-  fetchOnProgress as fetchTopicOnProgress,
-  fetchSuccess as fetchTopicSuccess,
+  setLargeTopic,
+  setSmallTopic,
+  fetchLargeTopicSuccess,
+  fetchSmallTopicSuccess,
+  fetchLargeTopicOnProgress,
+  fetchSmallTopicOnProgress,
 } from '../actions/topic';
 import {
-  set as setLesson,
-  fetchOnProgress as fetchLessonOnProgress,
-  fetchSuccess as fetchLessonSuccess,
-} from '../actions/lesson';
-import {
-  set as setAssignment,
-  fetchOnProgress as fetchAssignmentOnProgress,
-  fetchSuccess as fetchAssignmentSuccess,
-} from '../actions/assignment';
-import {
-  TOPIC_FETCH_BY_PARENT_ID,
-  TOPIC_FETCH_BY_TOPIC_ID,
+  TOPIC_FETCH_LARGE_BY_PARENT_ID,
+  TOPIC_FETCH_SMALL_BY_PARENT_ID,
+  TOPIC_FETCH_LARGE_BY_TOPIC_ID,
+  TOPIC_FETCH_SMALL_BY_TOPIC_ID,
 } from '../actions/types';
 
-const getTopicByParentId = (parentId: number) => {
+export const getTopicByParentId = (parentId: number) => {
   return callElearningApi({
     url: `get-topic-by-parent-id?parentId=${parentId}&offset=0&limit=-1`,
     params: null,
@@ -28,7 +23,7 @@ const getTopicByParentId = (parentId: number) => {
   });
 };
 
-const getTopicByTopicId = (topicId: number) => {
+export const getTopicByTopicId = (topicId: number) => {
   return callElearningApi({
     url: `get-topic-by-id?topicId=${topicId}`,
     params: null,
@@ -36,51 +31,69 @@ const getTopicByTopicId = (topicId: number) => {
   });
 };
 
-export function* fetchTopicByParentId(action: any) {
+export function* fetchLargeTopicByParentId(action: any) {
   try {
+    yield put(fetchLargeTopicOnProgress());
     const response = yield call(getTopicByParentId, action.parentId);
-    yield put(setTopic(response));
+    yield put(setLargeTopic(response));
+    yield put(fetchLargeTopicSuccess());
   } catch (err) {
     console.log(err);
   }
 }
 
-export function* fetchTopicByTopicId(action: any) {
+export function* fetchSmallTopicByParentId(action: any) {
   try {
-    yield put(fetchLessonOnProgress());
-    yield put(fetchTopicOnProgress());
-    yield put(fetchAssignmentOnProgress());
-    const response = yield call(getTopicByTopicId, action.topicId);
-    if (response.type === 1) {
-      //fetch current lesson
-      yield put(setLesson(response));
-      yield put(fetchLessonSuccess());
-
-      // fetch assignment of current lesson
-      const assignment = yield call(getTopicByParentId, action.topicId);
-      yield put(setAssignment(assignment));
-      yield put(fetchAssignmentSuccess());
-
-      // fetch topic-part in the right hand side
-      const topic = yield call(getTopicByParentId, response.parentId);
-      yield put(setTopic(topic));
-      yield put(fetchTopicSuccess());
-    } else if (response.type === 2) yield put(setAssignment(response));
-    else put(setTopic(response));
+    yield put(fetchSmallTopicOnProgress());
+    const response = yield call(getTopicByParentId, action.parentId);
+    yield put(setSmallTopic(response));
+    yield put(fetchSmallTopicSuccess());
   } catch (err) {
     console.log(err);
   }
 }
 
-export function* watchFetchByParentId() {
-  yield takeLatest(TOPIC_FETCH_BY_PARENT_ID, fetchTopicByParentId);
+export function* fetchLargeTopicByTopicId(action: any) {
+  try {
+    yield put(fetchLargeTopicOnProgress());
+    const response = yield call(getTopicByTopicId, action.topicId);
+    yield put(setLargeTopic(response));
+    yield put(fetchLargeTopicSuccess());
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-export function* watchFetchByTopicId() {
-  yield takeLatest(TOPIC_FETCH_BY_TOPIC_ID, fetchTopicByTopicId);
+export function* fetchSmallTopicByTopicId(action: any) {
+  try {
+    yield put(fetchSmallTopicOnProgress());
+    const response = yield call(getTopicByTopicId, action.topicId);
+    yield put(setSmallTopic(response));
+    yield put(fetchSmallTopicSuccess());
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* watchFetchLargeTopicByParentId() {
+  yield takeLatest(TOPIC_FETCH_LARGE_BY_PARENT_ID, fetchLargeTopicByParentId);
+}
+
+export function* watchFetchSmallTopicByParentId() {
+  yield takeLatest(TOPIC_FETCH_SMALL_BY_PARENT_ID, fetchSmallTopicByParentId);
+}
+
+export function* watchFetchLargeTopicByTopicId() {
+  yield takeLatest(TOPIC_FETCH_LARGE_BY_TOPIC_ID, fetchLargeTopicByTopicId);
+}
+
+export function* watchFetchSmallTopicByTopicId() {
+  yield takeLatest(TOPIC_FETCH_SMALL_BY_TOPIC_ID, fetchSmallTopicByTopicId);
 }
 
 export default function* course() {
-  yield fork(watchFetchByParentId);
-  yield fork(watchFetchByTopicId);
+  yield fork(watchFetchLargeTopicByParentId);
+  yield fork(watchFetchSmallTopicByParentId);
+  yield fork(watchFetchLargeTopicByTopicId);
+  yield fork(watchFetchSmallTopicByTopicId);
 }

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from '../../redux/appstate';
-import * as topicAction from '../../redux/actions/topic';
+import * as operationAction from '../../redux/actions/operation';
 import { getIdByPathName, sortArrayByPropertyValue } from '../../utils';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -31,13 +31,13 @@ const referenceArray = [
 ];
 
 const LessonPage: FunctionComponent<{
-  fetchTopicByTopicId: Function;
+  fetchDataInLessonPage: Function;
   match: any;
   assignmentState: any;
   topicState: any;
   lessonState: any;
 }> = ({
-  fetchTopicByTopicId,
+  fetchDataInLessonPage,
   match,
   assignmentState,
   topicState,
@@ -49,7 +49,7 @@ const LessonPage: FunctionComponent<{
     const pathname = match.params.pathname;
     if (match.params.pathname) {
       const topicId = getIdByPathName(pathname);
-      fetchTopicByTopicId(topicId);
+      fetchDataInLessonPage(topicId);
     }
     //eslint-disable-next-line
   }, [match]);
@@ -58,16 +58,21 @@ const LessonPage: FunctionComponent<{
     <MainWidget className={'home-page'}>
       <Header />
       <Grid container className='container'>
-        <VideoDialog isOpenVideo={isOpenVideo} setOpenVideo={setOpenVideo} />
+        <VideoDialog
+          isOpenVideo={isOpenVideo}
+          setOpenVideo={setOpenVideo}
+          lessonState={lessonState.current}
+          assignmentState={assignmentState.data}
+        />
         <Grid item xs={9}>
-          {lessonState.isLoading ? (
-            <Loading />
-          ) : (
-            <Paper
-              elevation={1}
-              className='main-block-panel topic-content-find-media-element'
-            >
-              <div className='main-block-header-panel'>Mô tả</div>
+          <Paper
+            elevation={1}
+            className='main-block-panel topic-content-find-media-element'
+          >
+            <div className='main-block-header-panel'>Mô tả</div>
+            {lessonState.isLoading | assignmentState.isLoading ? (
+              <Loading />
+            ) : (
               <div className='video-panel'>
                 <img
                   className='video-panel-img'
@@ -77,9 +82,8 @@ const LessonPage: FunctionComponent<{
                   onClick={() => setOpenVideo(true)}
                 />
               </div>
-            </Paper>
-          )}
-
+            )}
+          </Paper>
           <Paper elevation={1} className='main-block-panel content-block-panel'>
             <div className='main-block-header-panel'>Nội dung bài học</div>
             <div className='block main-block-content-panel'>
@@ -152,36 +156,37 @@ const LessonPage: FunctionComponent<{
           <Paper elevation={1} className='custom-block-panel topic-tree-panel'>
             <div className='custom-block-header-panel'>Bài tập</div>
             <div className='block custom-block-content-panel'>
-              {topicState.isLoading ? (
+              {topicState.isLoadingSmallTopic ? (
                 <Loading />
               ) : (
-                sortArrayByPropertyValue(topicState.data, 'orderIndex').map(
-                  (topic: any) => (
-                    <div key={topic.id} className='topic-item'>
-                      {topic.type === 1 ? (
-                        <React.Fragment>
-                          <MenuBookIcon className='topic-item-icon' />
-                          <Link
-                            to={`/lesson/${topic.friendlyUrl}-${topic.id}`}
-                            className='link'
-                          >
-                            {topic.name}
-                          </Link>
-                        </React.Fragment>
-                      ) : (
-                        <React.Fragment>
-                          <AlarmIcon className='topic-item-icon' />
-                          <Link
-                            to={`/assignment/${topic.friendlyUrl}-${topic.id}`}
-                            className='link'
-                          >
-                            {topic.name}
-                          </Link>
-                        </React.Fragment>
-                      )}
-                    </div>
-                  )
-                )
+                sortArrayByPropertyValue(
+                  topicState.smallTopic,
+                  'orderIndex'
+                ).map((topic: any) => (
+                  <div key={topic.id} className='topic-item'>
+                    {topic.type === 1 ? (
+                      <React.Fragment>
+                        <MenuBookIcon className='topic-item-icon' />
+                        <Link
+                          to={`/lesson/${topic.friendlyUrl}-${topic.id}`}
+                          className='link'
+                        >
+                          {topic.name}
+                        </Link>
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <AlarmIcon className='topic-item-icon' />
+                        <Link
+                          to={`/assignment/${topic.friendlyUrl}-${topic.id}`}
+                          className='link'
+                        >
+                          {topic.name}
+                        </Link>
+                      </React.Fragment>
+                    )}
+                  </div>
+                ))
               )}
             </div>
           </Paper>
@@ -285,8 +290,8 @@ const mapStateToProps = (state: AppState, ownProps: any) => {
   };
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchTopicByTopicId: (topicId: number) =>
-    dispatch(topicAction.fetchTopicByTopicId(topicId)),
+  fetchDataInLessonPage: (topicId: number) =>
+    dispatch(operationAction.fetchDataInLessonPage(topicId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LessonPage);

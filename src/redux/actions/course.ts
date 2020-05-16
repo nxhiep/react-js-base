@@ -28,20 +28,20 @@ export function fetchCourseByCourseId(courseId: number): CourseAction {
   };
 }
 
-export function set(course: any): CourseAction {
+export function setCourse(course: any): CourseAction {
   return {
     type: COURSE_SET_DATA,
     course,
   };
 }
 
-export function fetchSuccess(): CourseAction {
+export function fetchCourseSuccess(): CourseAction {
   return {
     type: COURSE_FETCH_SUCCESS,
   };
 }
 
-export function fetchOnProgress(): CourseAction {
+export function fetchCourseOnProgress(): CourseAction {
   return {
     type: COURSE_FETCH_ON_PROGRESS,
   };

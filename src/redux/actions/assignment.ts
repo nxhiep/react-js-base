@@ -10,20 +10,20 @@ export interface AssignmentAction {
   assignment?: Array<Topic>;
 }
 
-export function set(assignment: any): AssignmentAction {
+export function setAssignment(assignment: any): AssignmentAction {
   return {
     type: ASSIGNMENT_SET_DATA,
     assignment,
   };
 }
 
-export function fetchSuccess(): AssignmentAction {
+export function fetchAssignmentSuccess(): AssignmentAction {
   return {
     type: ASSIGNMENT_FETCH_SUCCESS,
   };
 }
 
-export function fetchOnProgress(): AssignmentAction {
+export function fetchAssignmentOnProgress(): AssignmentAction {
   return {
     type: ASSIGNMENT_FETCH_ON_PROGRESS,
   };
