@@ -11,26 +11,26 @@ export interface CategoryAction {
   category?: Array<Category>;
 }
 
-export function fetch(): CategoryAction {
+export function fetchCategory(): CategoryAction {
   return {
     type: CATEGORY_FETCH_ALL,
   };
 }
 
-export function set(category: any): CategoryAction {
+export function setCategory(category: any): CategoryAction {
   return {
     type: CATEGORY_SET_DATA,
     category,
   };
 }
 
-export function fetchSuccess(): CategoryAction {
+export function fetchCategorySuccess(): CategoryAction {
   return {
     type: CATEGORY_FETCH_SUCCESS,
   };
 }
 
-export function fetchOnProgress(): CategoryAction {
+export function fetchCategoryOnProgress(): CategoryAction {
   return {
     type: CATEGORY_FETCH_ON_PROGRESS,
   };

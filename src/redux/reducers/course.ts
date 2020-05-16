@@ -1,16 +1,21 @@
 import { Reducer } from 'redux';
 import Course from '../../models/Course';
 import { CourseAction } from '../actions/course';
-import { COURSE_SET_DATA } from '../actions/types';
+import {
+  COURSE_SET_DATA,
+  COURSE_FETCH_SUCCESS,
+  COURSE_FETCH_ON_PROGRESS,
+} from '../actions/types';
 
 export interface CourseState {
   isLoading: boolean;
   data: Array<Course>;
   error: string;
+  current?: Course;
 }
 
 const initState = {
-  isLoading: false,
+  isLoading: true,
   data: [],
   error: '',
 };
@@ -24,6 +29,18 @@ const courseState: Reducer<CourseState> = (
       return {
         ...state,
         data: action.course,
+      };
+    }
+    case COURSE_FETCH_ON_PROGRESS: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case COURSE_FETCH_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
       };
     }
     default:

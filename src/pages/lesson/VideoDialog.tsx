@@ -30,19 +30,18 @@ const Transition: any = React.forwardRef(function Transition(
 const VideoDialog: FunctionComponent<{
   isOpenVideo: any;
   setOpenVideo: Function;
-}> = ({ isOpenVideo, setOpenVideo }) => {
-  const [assignmentArray, setAssignmentArray] = useState([
-    { id: 1, name: 'Bài tập 1', timeShowUp: 120, duration: 120, isOpen: false },
-    { id: 2, name: 'Bải tập 2', timeShowUp: 400, duration: 60, isOpen: false },
-    { id: 3, name: 'Bải tập 3', timeShowUp: 800, duration: 90, isOpen: false },
-    { id: 4, name: 'Bải tập 4', timeShowUp: 1200, duration: 75, isOpen: false },
-  ]);
+  assignmentState: any;
+  lessonState: any;
+}> = ({ isOpenVideo, setOpenVideo, assignmentState, lessonState }) => {
+  const [assignmentArray, setAssignmentArray] = useState([...assignmentState]);
 
   const handleOpenAssignment = (id: any) => {
     const newAssignmentArray = assignmentArray.map((assignment) => {
-      if (id === assignment.id)
-        return { ...assignment, isOpen: !assignment.isOpen };
-      else return { ...assignment, isOpen: false };
+      if (id === assignment.id) {
+        if (assignment.isOpen)
+          return { ...assignment, isOpen: !assignment.isOpen };
+        else return { ...assignment, isOpen: true };
+      } else return { ...assignment, isOpen: false };
     });
     setAssignmentArray(newAssignmentArray);
   };
@@ -98,8 +97,9 @@ const VideoDialog: FunctionComponent<{
                     <div style={{ textAlign: 'center' }}>
                       {assignment.name}
                       <br />
+                      {/* {`Thời điểm xuất hiện ${convertSecondToMinute(assignment.timeToShowUp)}`} */}
                       {`Thời điểm xuất hiện ${convertSecondToMinute(
-                        assignment.timeShowUp
+                        Math.round(Math.random() * 1000)
                       )}`}
                     </div>
                   }

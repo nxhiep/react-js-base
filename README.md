@@ -1,3 +1,15 @@
+# Note
+
+Phần này ghi bằng Tiếng Việt cho mọi người dễ hiểu:
+
+- Reducer của mình sẽ tổ chức như sau.
+- Trong category sẽ chứa nhiều course, trong course chứa nhiều topic lớn (các part), trong topic lớn
+  chứa nhiều topic nhỏ (các bài học, bài tập, bài thi) và trong bài tập, bài thi sẽ chứa các câu hỏi.
+- 1 state sẽ có cả mảng data chứa allData và currentData.
+- Ví dụ: chúng ta muốn truy cập tới 1 topic nhỏ, nhưng vẫn muốn lưu các thông tin của topic nhỏ còn lại,
+  thì lưu toàn bộ topic nhỏ vào data và lưu topic mình đang truy cập vào current.
+- Nếu mọi người làm, thì pull code mới nhất từ master về, không hiểu đoạn nào thì hỏi mình, sau đó khi push code mới lên thì ping mình vào review, cấm không được push thẳng lên master.
+
 ### Version 1.0
 
 25/3/2020
@@ -39,9 +51,18 @@
 
 16/5/2020
 
-- Added interface for assignment page
+- Added interface for assignment page, loading component
 - Seperate between assignment, lesson and topic
 - Added fetch_on_progress and fetch_success
 - Added real data and link
 - Added root color variable
 - Todo: must seperate between assignment and test
+
+### Version 2.0
+
+16/5/20202
+
+- Added smallTopic and largeTopic state
+- Reorganize all state
+- Added fetch_on_progress and fetch_on_success in saga of its own action
+- Todo: make breadcrumbs and current topic, current lesson

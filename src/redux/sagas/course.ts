@@ -1,6 +1,10 @@
 import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { callElearningApi } from '../../services';
-import { set as setCourse } from '../actions/course';
+import {
+  setCourse,
+  fetchCourseSuccess,
+  fetchCourseOnProgress,
+} from '../actions/course';
 import {
   COURSE_FETCH_BY_CATEGORY_ID,
   COURSE_FETCH_BY_COURSE_ID,
@@ -24,8 +28,10 @@ const getCourseByCourseId = (courseId: number) => {
 
 export function* fetchCourseByCategoryId(action: any) {
   try {
+    yield put(fetchCourseOnProgress());
     const response = yield call(getCourseByCategoryId, action.categoryId);
     yield put(setCourse(response));
+    yield put(fetchCourseSuccess());
   } catch (err) {
     console.log(err);
   }
@@ -33,8 +39,10 @@ export function* fetchCourseByCategoryId(action: any) {
 
 export function* fetchCourseByCourseId(action: any) {
   try {
+    yield put(fetchCourseOnProgress());
     const response = yield call(getCourseByCourseId, action.courseId);
     yield put(setCourse(response));
+    yield put(fetchCourseSuccess());
   } catch (err) {
     console.log(err);
   }
