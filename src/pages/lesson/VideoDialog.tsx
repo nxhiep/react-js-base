@@ -12,20 +12,13 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import AssignmentDialog from '../../components/AssignmentDialog';
 
 import '../../resources/scss/videoDialog.scss';
-import '../../resources/scss/game.scss';
+import '../../resources/scss/lesson.scss';
 
 const referenceArray = [
   { id: 1, name: '700 từ vựng Part 1' },
   { id: 2, name: 'Photo of people (Part 1)' },
   { id: 3, name: 'Audio Photos of people (Part 1)' },
 ];
-
-// let assignmentArray = [
-//   { id: 1, name: 'Bài tập 1', timeShowUp: 120, duration: 120, isOpen: false },
-//   { id: 2, name: 'Bải tập 2', timeShowUp: 400, duration: 60, isOpen: false },
-//   { id: 3, name: 'Bải tập 3', timeShowUp: 800, duration: 90, isOpen: false },
-//   { id: 4, name: 'Bải tập 4', timeShowUp: 1200, duration: 75, isOpen: false }
-// ];
 
 const Transition: any = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },

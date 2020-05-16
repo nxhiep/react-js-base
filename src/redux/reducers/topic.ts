@@ -1,18 +1,22 @@
 import { Reducer } from 'redux';
 import Topic from '../../models/Topic';
 import { TopicAction } from '../actions/topic';
-import { TOPIC_SET_DATA } from '../actions/types';
+import {
+  TOPIC_SET_DATA,
+  TOPIC_FETCH_SUCCESS,
+  TOPIC_FETCH_ON_PROGRESS,
+} from '../actions/types';
 
 export interface TopicState {
-  loading: boolean;
+  isLoading: boolean;
   data: Array<Topic>;
   error: string;
 }
 
 const initState = {
-  loading: false,
+  isLoading: true,
   data: [],
-  error: ''
+  error: '',
 };
 
 const topicState: Reducer<TopicState> = (
@@ -23,7 +27,19 @@ const topicState: Reducer<TopicState> = (
     case TOPIC_SET_DATA: {
       return {
         ...state,
-        data: action.topic
+        data: action.topic,
+      };
+    }
+    case TOPIC_FETCH_ON_PROGRESS: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case TOPIC_FETCH_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
       };
     }
     default:

@@ -21,21 +21,28 @@ localforage.config({
   version: 1.0,
   size: 4980736, // Size of database, in bytes. WebSQL-only for now.
   storeName: 'data', // Should be alphanumeric, with underscores.
-  description: 'offline data for web'
+  description: 'offline data for web',
 });
 const encryptor = createEncryptor({
   secretKey: Config.SECRET_KEY,
-  onError: function(error) {
+  onError: function (error) {
     // Handle the error.
     console.log('encrypt error', error);
-  }
+  },
 });
 const persistConfig = {
   key: 'root',
   storage: localforage,
   stateReconciler: autoMergeLevel2,
   transform: [encryptor],
-  whitelist: ['appInfoState', 'courseState', 'categoryState', 'topicState']
+  whitelist: [
+    'appInfoState',
+    'courseState',
+    'categoryState',
+    'topicState',
+    'assignmentState',
+    'lessonState',
+  ],
 };
 const pReducer = persistReducer(persistConfig, rootReducer);
 export default function configureStore() {

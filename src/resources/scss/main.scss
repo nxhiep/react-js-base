@@ -1,5 +1,9 @@
 @import './mixin.scss';
 
+:root {
+  --root-color: #c21b17;
+}
+
 .logo-web {
   font-size: 20px;
 }
@@ -251,6 +255,7 @@ footer {
 
 @include makeScrollStyle(html, 10px, 10px, 10px, #999);
 @include makeScrollStyle(body, 10px, 10px, 10px, #999);
+@include makeScrollStyle(div, 10px, 10px, 10px, #999);
 
 .my-modal {
   display: flex;

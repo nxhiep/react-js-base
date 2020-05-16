@@ -51,7 +51,7 @@ const AssignmentDialog: FunctionComponent<{
           />
           <div className='remain-time'>
             <div>
-              <p style={{ color: '#c21b17', margin: 0 }}>
+              <p className='remain-time-detail'>
                 {convertSecondToMinute(timeLeft)}
               </p>
             </div>

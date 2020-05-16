@@ -4,15 +4,15 @@ import { CategoryAction } from '../actions/category';
 import { CATEGORY_SET_DATA } from '../actions/types';
 
 export interface CategoryState {
-  loading: boolean;
+  isLoading: boolean;
   data: Array<Category>;
   error: string;
 }
 
 const initState = {
-  loading: false,
+  isLoading: false,
   data: [],
-  error: ''
+  error: '',
 };
 
 const categoryState: Reducer<CategoryState> = (
@@ -23,7 +23,7 @@ const categoryState: Reducer<CategoryState> = (
     case CATEGORY_SET_DATA: {
       return {
         ...state,
-        data: action.category
+        data: action.category,
       };
     }
     default:

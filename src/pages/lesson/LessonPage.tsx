@@ -1,13 +1,15 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from '../../redux/appstate';
 import * as topicAction from '../../redux/actions/topic';
-import { getIdByPathName } from '../../utils';
+import { getIdByPathName, sortArrayByPropertyValue } from '../../utils';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { MainWidget } from '../../components/Widgets';
 import VideoDialog from './VideoDialog';
-import '../../resources/scss/game.scss';
+import Loading from '../../components/Loading';
+import '../../resources/scss/lesson.scss';
 
 import UserImage from '../../resources/images/user.png';
 import { Paper, Grid, Avatar } from '@material-ui/core';
@@ -18,14 +20,9 @@ import {
   Group as GroupIcon,
   EventNote as EventNoteIcon,
   Note as NoteIcon,
+  MenuBook as MenuBookIcon,
+  Alarm as AlarmIcon,
 } from '@material-ui/icons';
-
-const topicArray = [
-  { id: 1, name: '(Part 1) Photo of People' },
-  { id: 2, name: 'Bài thi online Part 1 (1)' },
-  { id: 3, name: 'Bài thi online Part 1 (2)' },
-  { id: 4, name: '(Part 1) Photo of people (2) & Photo of objects and views' },
-];
 
 const referenceArray = [
   { id: 1, name: '700 từ vựng Part 1' },
@@ -36,7 +33,16 @@ const referenceArray = [
 const LessonPage: FunctionComponent<{
   fetchTopicByTopicId: Function;
   match: any;
-}> = ({ fetchTopicByTopicId, match }) => {
+  assignmentState: any;
+  topicState: any;
+  lessonState: any;
+}> = ({
+  fetchTopicByTopicId,
+  match,
+  assignmentState,
+  topicState,
+  lessonState,
+}) => {
   const [isOpenVideo, setOpenVideo] = useState(false);
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const LessonPage: FunctionComponent<{
       fetchTopicByTopicId(topicId);
     }
     //eslint-disable-next-line
-  }, []);
+  }, [match]);
 
   return (
     <MainWidget className={'home-page'}>
@@ -54,30 +60,76 @@ const LessonPage: FunctionComponent<{
       <Grid container className='container'>
         <VideoDialog isOpenVideo={isOpenVideo} setOpenVideo={setOpenVideo} />
         <Grid item xs={9}>
-          <Paper
-            elevation={1}
-            className='main-block-panel topic-content-find-media-element'
-          >
-            <div className='main-block-header-panel'>Mô tả</div>
-            <div className='video-panel'>
-              <img
-                className='video-panel-img'
-                alt='video img'
-                src='https://storage.googleapis.com/comaiphuong-edu-media/images/images_default_videojs.jpg'
-                src-video-js='https://ngonngu.vncdn.vn/output/toeic450/part1/part1bai1304499552.mp4/1/2/1119/304499552.m3u8'
-                onClick={() => setOpenVideo(true)}
-              />
-            </div>
-          </Paper>
+          {lessonState.isLoading ? (
+            <Loading />
+          ) : (
+            <Paper
+              elevation={1}
+              className='main-block-panel topic-content-find-media-element'
+            >
+              <div className='main-block-header-panel'>Mô tả</div>
+              <div className='video-panel'>
+                <img
+                  className='video-panel-img'
+                  alt='video img'
+                  src='https://storage.googleapis.com/comaiphuong-edu-media/images/images_default_videojs.jpg'
+                  src-video-js='https://ngonngu.vncdn.vn/output/toeic450/part1/part1bai1304499552.mp4/1/2/1119/304499552.m3u8'
+                  onClick={() => setOpenVideo(true)}
+                />
+              </div>
+            </Paper>
+          )}
+
           <Paper elevation={1} className='main-block-panel content-block-panel'>
             <div className='main-block-header-panel'>Nội dung bài học</div>
-            <div className='main-block-content-panel'>
-              Nothing to show right now
+            <div className='block main-block-content-panel'>
+              {assignmentState.isLoading ? (
+                <Loading />
+              ) : (
+                <React.Fragment>
+                  <div className='topic-item-header-panel'>
+                    <div className='top-item-header-left-panel'></div>
+                    <div className='topic-item-content'>
+                      <div className='name-panel'>Tên bài học</div>
+                      <div className='topic-item-progress'>Tiến độ học</div>
+                    </div>
+                  </div>
+                  {sortArrayByPropertyValue(
+                    assignmentState.data,
+                    'orderIndex'
+                  ).map((assignment: any) => (
+                    <div className='topic-item-panel' key={assignment.id}>
+                      <div className='topic-item-left-panel'>
+                        <div className='topic-item-number'>
+                          <span>{assignment.orderIndex + 1}</span>
+                        </div>
+                      </div>
+                      <div className='topic-item-row-info-panel'>
+                        <div className='topic-item-content'>
+                          <AssignmentIcon style={{ padding: '10px' }} />
+                          <div className='name-panel topic-detail-item-content'>
+                            <Link
+                              to={`/assignment/${assignment.friendlyUrl}-${assignment.id}`}
+                              className='name-panel link-panel'
+                            >
+                              {assignment.name}
+                            </Link>
+                            <div className='topic-detail-number-question'>
+                              {`${assignment.childrentIds.length} Câu hỏi`}
+                            </div>
+                          </div>
+                          <div className='topic-item-progress'>-</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </React.Fragment>
+              )}
             </div>
           </Paper>
           <Paper elevation={1} className='main-block-panel reference-panel'>
             <div className='main-block-header-panel'>Tài liệu tham khảo</div>
-            <div className='main-block-content-panel'>
+            <div className='block main-block-content-panel'>
               {referenceArray.map((reference) => (
                 <div className='reference-item' key={reference.id}>
                   <DescriptionIcon className='reference-item-icon' />
@@ -93,22 +145,44 @@ const LessonPage: FunctionComponent<{
           </Paper>
           <Paper elevation={1} className='main-block-panel comment-panel'>
             <div className='main-block-header-panel'>Bình luận</div>
-            <div className='main-block-content-panel'>
-              Nothing to show right now
-            </div>
+            <div className='block main-block-content-panel'>{}</div>
           </Paper>
         </Grid>
         <Grid item xs={3}>
           <Paper elevation={1} className='custom-block-panel topic-tree-panel'>
             <div className='custom-block-header-panel'>Bài tập</div>
-            <div className='custom-block-content-panel'>
-              {topicArray.map((topic) => (
-                <div key={topic.id} className='topic-item'>
-                  <a href='https://www.google.com/' className='link'>
-                    {topic.name}
-                  </a>
-                </div>
-              ))}
+            <div className='block custom-block-content-panel'>
+              {topicState.isLoading ? (
+                <Loading />
+              ) : (
+                sortArrayByPropertyValue(topicState.data, 'orderIndex').map(
+                  (topic: any) => (
+                    <div key={topic.id} className='topic-item'>
+                      {topic.type === 1 ? (
+                        <React.Fragment>
+                          <MenuBookIcon className='topic-item-icon' />
+                          <Link
+                            to={`/lesson/${topic.friendlyUrl}-${topic.id}`}
+                            className='link'
+                          >
+                            {topic.name}
+                          </Link>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <AlarmIcon className='topic-item-icon' />
+                          <Link
+                            to={`/assignment/${topic.friendlyUrl}-${topic.id}`}
+                            className='link'
+                          >
+                            {topic.name}
+                          </Link>
+                        </React.Fragment>
+                      )}
+                    </div>
+                  )
+                )
+              )}
             </div>
           </Paper>
           <Paper elevation={1} className='custom-block-panel user-info-panel'>
@@ -205,6 +279,8 @@ const LessonPage: FunctionComponent<{
 const mapStateToProps = (state: AppState, ownProps: any) => {
   return {
     lessonState: state.lessonState,
+    assignmentState: state.assignmentState,
+    topicState: state.topicState,
     ...ownProps,
   };
 };
