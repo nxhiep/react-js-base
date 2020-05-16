@@ -10,6 +10,8 @@ Phần này ghi bằng Tiếng Việt cho mọi người dễ hiểu:
   thì lưu toàn bộ topic nhỏ vào data và lưu topic mình đang truy cập vào current.
 - Nếu mọi người làm, thì pull code mới nhất từ master về, không hiểu đoạn nào thì hỏi mình, sau đó khi push code mới lên thì ping mình vào review, cấm không được push thẳng lên master.
 
+**Bảo Anh**
+
 ### Version 1.0
 
 25/3/2020
