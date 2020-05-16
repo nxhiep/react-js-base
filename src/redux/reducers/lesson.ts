@@ -4,13 +4,13 @@ import { LessonAction } from '../actions/lesson';
 import { LESSON_SET_DATA } from '../actions/types';
 
 export interface LessonState {
-  loading: boolean;
+  isLoading: boolean;
   data: Array<Topic>;
   error: string;
 }
 
 const initState = {
-  loading: false,
+  isLoading: true,
   data: [],
   error: '',
 };

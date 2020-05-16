@@ -4,15 +4,15 @@ import { CourseAction } from '../actions/course';
 import { COURSE_SET_DATA } from '../actions/types';
 
 export interface CourseState {
-  loading: boolean;
+  isLoading: boolean;
   data: Array<Course>;
   error: string;
 }
 
 const initState = {
-  loading: false,
+  isLoading: false,
   data: [],
-  error: ''
+  error: '',
 };
 
 const courseState: Reducer<CourseState> = (
@@ -23,7 +23,7 @@ const courseState: Reducer<CourseState> = (
     case COURSE_SET_DATA: {
       return {
         ...state,
-        data: action.course
+        data: action.course,
       };
     }
     default:

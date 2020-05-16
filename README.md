@@ -30,6 +30,18 @@
 ### Version 1.3
 
 15/5/2020
- - Added topic, lesson, assignment domain, screen, reducer, action, saga
- - Rename game to lesson
- - Added get-topic-by-id and get-course-by-id api
+
+- Added topic, lesson, assignment domain, screen, reducer, action, saga
+- Rename game to lesson
+- Added get-topic-by-id and get-course-by-id api
+
+### Version 1.4
+
+16/5/2020
+
+- Added interface for assignment page
+- Seperate between assignment, lesson and topic
+- Added fetch_on_progress and fetch_success
+- Added real data and link
+- Added root color variable
+- Todo: must seperate between assignment and test
