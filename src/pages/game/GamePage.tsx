@@ -13,20 +13,20 @@ import {
   Assignment as AssignmentIcon,
   Group as GroupIcon,
   EventNote as EventNoteIcon,
-  Note as NoteIcon
+  Note as NoteIcon,
 } from '@material-ui/icons';
 
 const topicArray = [
   { id: 1, name: '(Part 1) Photo of People' },
   { id: 2, name: 'Bài thi online Part 1 (1)' },
   { id: 3, name: 'Bài thi online Part 1 (2)' },
-  { id: 4, name: '(Part 1) Photo of people (2) & Photo of objects and views' }
+  { id: 4, name: '(Part 1) Photo of people (2) & Photo of objects and views' },
 ];
 
 const referenceArray = [
   { id: 1, name: '700 từ vựng Part 1' },
   { id: 2, name: 'Photo of people (Part 1)' },
-  { id: 3, name: 'Audio Photos of people (Part 1)' }
+  { id: 3, name: 'Audio Photos of people (Part 1)' },
 ];
 
 const GamePage = () => {
@@ -62,11 +62,11 @@ const GamePage = () => {
           <Paper elevation={1} className='main-block-panel reference-panel'>
             <div className='main-block-header-panel'>Tài liệu tham khảo</div>
             <div className='main-block-content-panel'>
-              {referenceArray.map(reference => (
+              {referenceArray.map((reference) => (
                 <div className='reference-item' key={reference.id}>
                   <DescriptionIcon className='reference-item-icon' />
                   <div className='reference-item-content'>
-                    <a href='#' className='link'>
+                    <a href='www.google.com' className='link'>
                       {reference.name}
                     </a>
                   </div>
@@ -86,9 +86,9 @@ const GamePage = () => {
           <Paper elevation={1} className='custom-block-panel topic-tree-panel'>
             <div className='custom-block-header-panel'>Bài tập</div>
             <div className='custom-block-content-panel'>
-              {topicArray.map(topic => (
+              {topicArray.map((topic) => (
                 <div key={topic.id} className='topic-item'>
-                  <a href='#' className='link'>
+                  <a href='www.google.com' className='link'>
                     {topic.name}
                   </a>
                 </div>
@@ -117,7 +117,8 @@ const GamePage = () => {
                 Điểm kinh nghiệm: 600
               </div>
               <div className='user-info-content-panel'>
-                Bài học gần đây: <a href='#'>{'(Part 1) Photo of People'}</a>
+                Bài học gần đây:{' '}
+                <a href='www.google.com'>{'(Part 1) Photo of People'}</a>
               </div>
             </div>
           </Paper>
@@ -130,7 +131,7 @@ const GamePage = () => {
               <div className='ultility-content-panel'>
                 <AssignmentIcon className='ultility-content-item' />
                 <div className='ultility-content-item'>
-                  <a href='#' style={{ textDecoration: 'none' }}>
+                  <a href='www.google.com' style={{ textDecoration: 'none' }}>
                     {'Tài liệu '}
                     <span className='ultility-quantity'>104</span>
                   </a>
@@ -139,7 +140,7 @@ const GamePage = () => {
               <div className='ultility-content-panel'>
                 <GroupIcon className='ultility-content-item' />
                 <div className='ultility-content-item'>
-                  <a href='#' style={{ textDecoration: 'none' }}>
+                  <a href='www.google.com' style={{ textDecoration: 'none' }}>
                     {'Thành viên '}
                     <span className='ultility-quantity'>1080</span>
                   </a>
@@ -148,7 +149,7 @@ const GamePage = () => {
               <div className='ultility-content-panel'>
                 <EventNoteIcon className='ultility-content-item' />
                 <div className='ultility-content-item'>
-                  <a href='#' style={{ textDecoration: 'none' }}>
+                  <a href='www.google.com' style={{ textDecoration: 'none' }}>
                     {'Lịch học '}
                     <span className='ultility-quantity'>0</span>
                   </a>
@@ -157,7 +158,7 @@ const GamePage = () => {
               <div className='ultility-content-panel'>
                 <NoteIcon className='ultility-content-item' />
                 <div className='ultility-content-item'>
-                  <a href='#' style={{ textDecoration: 'none' }}>
+                  <a href='www.google.com' style={{ textDecoration: 'none' }}>
                     {'Ghi chú '}
                   </a>
                 </div>
