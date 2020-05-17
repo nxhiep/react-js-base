@@ -14,7 +14,7 @@
   padding: 10px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  border-left: 2px solid #c21b17;
+  border-left: 2px solid var(--root-color);
   position: relative;
   background-color: white;
   display: flex;
@@ -26,7 +26,7 @@
 }
 
 .video-dialog-close-icon {
-  color: #c21b17;
+  color: var(--root-color);
   margin: 0px;
   padding: 0px !important;
 }
@@ -62,7 +62,7 @@
 }
 
 .video-dialog-left-assignment-icon-panel {
-  border: 1px solid #c21b17;
-  color: #c21b17;
+  border: 1px solid var(--root-color);
+  color: var(--root-color);
   padding: 8px;
 }

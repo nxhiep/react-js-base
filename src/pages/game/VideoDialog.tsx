@@ -6,7 +6,7 @@ import {
   Cancel as CancelIcon,
   Description as DescriptionIcon,
   GetApp as GetAppIcon,
-  Assignment as AssignmentIcon
+  Assignment as AssignmentIcon,
 } from '@material-ui/icons';
 import { TransitionProps } from '@material-ui/core/transitions';
 import AssignmentDialog from '../../components/AssignmentDialog';
@@ -17,7 +17,7 @@ import '../../resources/scss/game.scss';
 const referenceArray = [
   { id: 1, name: '700 từ vựng Part 1' },
   { id: 2, name: 'Photo of people (Part 1)' },
-  { id: 3, name: 'Audio Photos of people (Part 1)' }
+  { id: 3, name: 'Audio Photos of people (Part 1)' },
 ];
 
 // let assignmentArray = [
@@ -42,11 +42,11 @@ const VideoDialog: FunctionComponent<{
     { id: 1, name: 'Bài tập 1', timeShowUp: 120, duration: 120, isOpen: false },
     { id: 2, name: 'Bải tập 2', timeShowUp: 400, duration: 60, isOpen: false },
     { id: 3, name: 'Bải tập 3', timeShowUp: 800, duration: 90, isOpen: false },
-    { id: 4, name: 'Bải tập 4', timeShowUp: 1200, duration: 75, isOpen: false }
+    { id: 4, name: 'Bải tập 4', timeShowUp: 1200, duration: 75, isOpen: false },
   ]);
 
   const handleOpenAssignment = (id: any) => {
-    const newAssignmentArray = assignmentArray.map(assignment => {
+    const newAssignmentArray = assignmentArray.map((assignment) => {
       if (id === assignment.id)
         return { ...assignment, isOpen: !assignment.isOpen };
       else return { ...assignment, isOpen: false };
@@ -55,7 +55,7 @@ const VideoDialog: FunctionComponent<{
   };
 
   const handleOpenAssignmentWhenTimeCome = (state: any) => {
-    assignmentArray.forEach(assignment => {
+    assignmentArray.forEach((assignment) => {
       if (Math.round(state.playedSeconds) === assignment.timeShowUp)
         handleOpenAssignment(assignment.id);
     });
@@ -68,7 +68,7 @@ const VideoDialog: FunctionComponent<{
       TransitionComponent={Transition}
       classes={{ paper: 'video-dialog-container' }}
     >
-      {assignmentArray.map(assignment => (
+      {assignmentArray.map((assignment) => (
         <AssignmentDialog
           key={assignment.id}
           assignment={assignment}
@@ -95,7 +95,7 @@ const VideoDialog: FunctionComponent<{
             onProgress={handleOpenAssignmentWhenTimeCome}
           />
           <div className='video-dialog-left-assignment-panel'>
-            {assignmentArray.map(assignment => (
+            {assignmentArray.map((assignment) => (
               <div
                 key={assignment.id}
                 className='video-dialog-left-assignment-item-panel'
@@ -124,7 +124,7 @@ const VideoDialog: FunctionComponent<{
           </div>
           <div className='video-dialog-left-reference-panel'>
             <div className='video-dialog-header'>Tài liệu tham khảo</div>
-            {referenceArray.map(reference => (
+            {referenceArray.map((reference) => (
               <div className='reference-item' key={reference.id}>
                 <DescriptionIcon className='reference-item-icon' />
                 <div className='reference-item-content'>

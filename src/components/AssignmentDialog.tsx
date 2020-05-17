@@ -26,8 +26,8 @@ const AssignmentDialog: FunctionComponent<{
   assignment: AssignmentInfo;
   handleOpenAssignment: Function;
 }> = ({ assignment, handleOpenAssignment }) => {
-  const [timeLeft, setTimeLeft] = useState(assignment.duration);
-
+  // const [timeLeft, setTimeLeft] = useState(assignment.duration);
+  const [timeLeft, setTimeLeft] = useState(Math.round(Math.random() * 200));
   useEffect(() => {
     const myTimeOut = setTimeout(() => {
       if (assignment.isOpen === true) {
@@ -51,7 +51,7 @@ const AssignmentDialog: FunctionComponent<{
           />
           <div className='remain-time'>
             <div>
-              <p style={{ color: '#c21b17', margin: 0 }}>
+              <p className='remain-time-detail'>
                 {convertSecondToMinute(timeLeft)}
               </p>
             </div>
@@ -74,7 +74,7 @@ const AssignmentDialog: FunctionComponent<{
 
   return (
     <Dialog
-      open={assignment.isOpen}
+      open={assignment.isOpen ? assignment.isOpen : false}
       aria-labelledby='responsive-dialog-title'
       TransitionComponent={Transition}
       classes={{ paper: 'assignment-dialog-container' }}

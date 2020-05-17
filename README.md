@@ -2,7 +2,7 @@
 
 25/3/2020
 
-- Created project's boilerplate!
+- Created project's boilerplate
 
 ### Version 1.1
 
